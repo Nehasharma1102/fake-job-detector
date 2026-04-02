@@ -1,7 +1,9 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify
+from flask_cors import CORS
 import pickle
 
 app = Flask(__name__)
+CORS(app)
 
 # Load model & vectorizer
 model = pickle.load(open('model.pkl', 'rb'))
@@ -9,17 +11,15 @@ vectorizer = pickle.load(open('vectorizer.pkl', 'rb'))
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return "Backend is running 🚀"
 
 @app.route('/predict', methods=['POST'])
 def predict():
     data = request.json
     text = data['text']
 
-    # Convert text
     text_vectorized = vectorizer.transform([text])
 
-    # ML Prediction
     prediction = model.predict(text_vectorized)[0]
     probability = model.predict_proba(text_vectorized)[0]
 
@@ -28,7 +28,6 @@ def predict():
 
     text_lower = text.lower()
 
-    # 🔥 RULE-BASED BOOST (important)
     is_fake_rule = False
     reasons = []
 
@@ -56,12 +55,11 @@ def predict():
         is_fake_rule = True
         reasons.append("Too good to be true offer")
 
-    # 🔥 FINAL DECISION
     if is_fake_rule:
         result = "FAKE"
-        score = max(fake_score, 80)  # boost confidence
+        score = max(fake_score, 80)
     else:
-        if fake_score > 40:   # lowered threshold
+        if fake_score > 40:
             result = "FAKE"
             score = fake_score
         else:
@@ -75,4 +73,4 @@ def predict():
     })
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
