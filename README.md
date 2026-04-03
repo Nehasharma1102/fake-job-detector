@@ -35,3 +35,6 @@ Helps women stay safe from job scams and frauds.
 ```bash
 python model.py
 python app.py
+
+## live demo
+https://nehasharma1102.github.io/fake-job-detector/
