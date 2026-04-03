@@ -31,26 +31,10 @@ body{background:linear-gradient(135deg,#0f172a,#020617);color:white;font-family:
 button{margin-top:15px;background:linear-gradient(90deg,#00d4ff,#00e1ff);color:#0a0a2e;border:none;padding:15px;border-radius:10px;font-size:16px;font-weight:600;cursor:pointer;width:100%;transition:0.3s;}
 button:hover{transform:scale(1.03);}
 
-/* TEXTAREA + MIC ROW */
 .textarea-wrap{position:relative;margin-top:10px;}
 textarea{width:100%;height:180px;background:#05051a;color:#e2e8f0;border:1px solid #00d4ff;border-radius:10px;padding:15px;padding-bottom:50px;font-family:'Poppins',sans-serif;font-size:14px;resize:none;}
 
-#micBtn{
-    position:absolute;
-    bottom:12px;
-    right:12px;
-    width:40px;height:40px;
-    border-radius:50%;
-    background:#00d4ff;
-    color:#0a0a2e;
-    border:none;
-    font-size:18px;
-    cursor:pointer;
-    display:flex;align-items:center;justify-content:center;
-    margin-top:0;
-    padding:0;
-    width:40px;
-}
+#micBtn{position:absolute;bottom:12px;right:12px;width:40px;height:40px;border-radius:50%;background:#00d4ff;color:#0a0a2e;border:none;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;margin-top:0;padding:0;}
 #micBtn.listening{background:red;animation:pulse 1s infinite;}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,0,0,0.5);}70%{box-shadow:0 0 0 10px rgba(255,0,0,0);}100%{box-shadow:0 0 0 0 rgba(255,0,0,0);}}
 
@@ -66,7 +50,6 @@ textarea{width:100%;height:180px;background:#05051a;color:#e2e8f0;border:1px sol
 .tips{margin-top:20px;font-size:13px;color:#aaa;text-align:left;}
 .footer{margin-top:20px;font-size:12px;opacity:0.6;}
 
-/* HISTORY PAGE */
 .history-item{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:14px 16px;margin-bottom:12px;text-align:left;}
 .history-item .h-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
 .history-item .h-badge{font-size:12px;font-weight:700;padding:3px 10px;border-radius:20px;}
@@ -102,7 +85,6 @@ textarea{width:100%;height:180px;background:#05051a;color:#e2e8f0;border:1px sol
     <div class="feature-box"><span class="feature-icon">📋</span><span>Scan history</span><span class="toggle">NEW</span></div>
 
     <button onclick="goToDetector()">Start Analyzing →</button>
-
     <p class="footer">Powered by <span style="color:#00d4ff;opacity:1;">Team CodeNexa</span></p>
     <p class="footer">Stay Safe • Stay Smart ⚡</p>
   </div>
@@ -114,7 +96,6 @@ textarea{width:100%;height:180px;background:#05051a;color:#e2e8f0;border:1px sol
     <h1 style="color:#00d4ff;">🔍 Job Detector</h1>
     <p style="font-size:14px;color:#aaa;margin-bottom:10px;">Paste or speak the job description below</p>
 
-    <!-- TEXTAREA WITH MIC BUTTON -->
     <div class="textarea-wrap">
       <textarea id="jobText" placeholder="Paste job description or press 🎙️ to speak..."></textarea>
       <button id="micBtn" onclick="toggleVoice()" title="Voice Input">🎙️</button>
@@ -140,7 +121,6 @@ textarea{width:100%;height:180px;background:#05051a;color:#e2e8f0;border:1px sol
 
     <button onclick="goToHistory()" style="background:#1e293b;color:#00d4ff;border:1px solid #00d4ff;margin-top:10px;">📋 View History</button>
     <button onclick="goToHome()" style="background:#1e293b;color:#fff;margin-top:10px;">⬅ Back</button>
-
     <p class="footer">Powered by <span style="color:#00d4ff;opacity:1;">Team CodeNexa</span> 🚀</p>
   </div>
 </div>
@@ -150,9 +130,7 @@ textarea{width:100%;height:180px;background:#05051a;color:#e2e8f0;border:1px sol
   <div class="container">
     <h1 style="color:#00d4ff;">📋 Scan History</h1>
     <p style="font-size:13px;color:#aaa;margin-bottom:20px;">Your recent job checks</p>
-
     <div id="historyList"></div>
-
     <button class="clear-btn" onclick="clearHistory()">🗑️ Clear All History</button>
     <button onclick="goToDetector()" style="background:#1e293b;color:#fff;margin-top:10px;">⬅ Back</button>
   </div>
@@ -187,11 +165,7 @@ function toggleVoice(){
     alert("Voice not supported in this browser. Use Chrome!");
     return;
   }
-
-  if(isListening){
-    recognition.stop();
-    return;
-  }
+  if(isListening){recognition.stop();return;}
 
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   recognition = new SpeechRecognition();
@@ -205,15 +179,11 @@ function toggleVoice(){
     document.getElementById("micBtn").innerText = "⏹️";
     document.getElementById("micStatus").innerText = "🔴 Listening... speak now";
   };
-
   recognition.onresult = (e)=>{
     let transcript = "";
-    for(let i=0;i<e.results.length;i++){
-      transcript += e.results[i][0].transcript;
-    }
+    for(let i=0;i<e.results.length;i++) transcript += e.results[i][0].transcript;
     document.getElementById("jobText").value = transcript;
   };
-
   recognition.onend = ()=>{
     isListening = false;
     document.getElementById("micBtn").classList.remove("listening");
@@ -221,14 +191,12 @@ function toggleVoice(){
     document.getElementById("micStatus").innerText = "✅ Voice captured!";
     setTimeout(()=>document.getElementById("micStatus").innerText="", 2000);
   };
-
   recognition.onerror = (e)=>{
     isListening = false;
     document.getElementById("micBtn").classList.remove("listening");
     document.getElementById("micBtn").innerText = "🎙️";
     document.getElementById("micStatus").innerText = "❌ Error: "+e.error;
   };
-
   recognition.start();
 }
 
@@ -241,20 +209,18 @@ function saveToHistory(text, result, confidence){
     confidence: confidence,
     date: new Date().toLocaleString('en-IN')
   });
-  if(history.length > 20) history.pop(); // max 20 items
+  if(history.length > 20) history.pop();
   localStorage.setItem("jobHistory", JSON.stringify(history));
 }
 
 function loadHistory(){
   const history = JSON.parse(localStorage.getItem("jobHistory") || "[]");
   const list = document.getElementById("historyList");
-
   if(history.length === 0){
     list.innerHTML = '<p class="empty-history">📭 No scans yet. Start checking jobs!</p>';
     return;
   }
-
-  list.innerHTML = history.map((item,i)=>`
+  list.innerHTML = history.map(item=>`
     <div class="history-item">
       <div class="h-top">
         <span class="h-badge ${item.result==='FAKE'?'badge-fake':'badge-real'}">
@@ -284,9 +250,22 @@ async function checkJob(){
   if(text.length<10){alert("Enter proper job description!");return;}
   if(/^[a-zA-Z]{1,10}$/.test(text.trim())){alert("Please enter meaningful job description!");return;}
 
+  // ✅ Job keywords validation
+  const jobKeywords = ["job","work","salary","hire","apply","position",
+  "vacancy","company","office","remote","experience","skills",
+  "requirements","contact","interview","fresher","recruiter",
+  "joining","profile","opening","qualification","post"];
+
+  const hasJobWord = jobKeywords.some(word=>text.toLowerCase().includes(word));
+  if(!hasJobWord){
+    alert("⚠️ Please enter a proper job description!\n\nExample: 'We are hiring freshers for data entry job...'");
+    return;
+  }
+
   btn.innerText="Checking...";
   btn.disabled=true;
   document.getElementById("loading").style.display="block";
+  document.getElementById("result").style.display="none";
 
   try{
     const response = await fetch("https://fake-job-backend-x5fs.onrender.com/predict",{
@@ -317,7 +296,7 @@ async function checkJob(){
     document.getElementById('reasonText').innerText=reason;
     document.getElementById("confidenceFill").style.width=data.confidence+"%";
 
-    // ✅ AUTO SAVE TO HISTORY
+    // ✅ Auto save to history
     saveToHistory(text, data.result, data.confidence);
 
   }catch(e){
