@@ -247,7 +247,7 @@ async function checkJob(){
   const btn = document.getElementById('btn');
 
   if(text.trim()===""){alert("Please enter text!");return;}
-  if(text.length<10){alert("Enter proper job description!");return;}
+  if(text.length<100){alert("⚠️ Please enter complete job description!\nExample: Company name, role, salary, requirements, contact details etc!");return;}
   if(/^[a-zA-Z]{1,10}$/.test(text.trim())){alert("Please enter meaningful job description!");return;}
 
   // ✅ Job keywords validation
