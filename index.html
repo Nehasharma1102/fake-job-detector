@@ -34,9 +34,65 @@ button:hover{transform:scale(1.03);}
 .textarea-wrap{position:relative;margin-top:10px;}
 textarea{width:100%;height:180px;background:#05051a;color:#e2e8f0;border:1px solid #00d4ff;border-radius:10px;padding:15px;padding-bottom:50px;font-family:'Poppins',sans-serif;font-size:14px;resize:none;}
 
-#micBtn{position:absolute;bottom:12px;right:12px;width:40px;height:40px;border-radius:50%;background:#00d4ff;color:#0a0a2e;border:none;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;margin-top:0;padding:0;}
+#micBtn{position:absolute;bottom:12px;right:56px;width:40px;height:40px;border-radius:50%;background:#00d4ff;color:#0a0a2e;border:none;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;margin-top:0;padding:0;width:40px;}
 #micBtn.listening{background:red;animation:pulse 1s infinite;}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,0,0,0.5);}70%{box-shadow:0 0 0 10px rgba(255,0,0,0);}100%{box-shadow:0 0 0 0 rgba(255,0,0,0);}}
+
+#filePickBtn{position:absolute;bottom:12px;right:12px;width:40px;height:40px;border-radius:50%;background:#7c3aed;color:#fff;border:none;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;margin-top:0;padding:0;transition:background 0.2s;}
+#filePickBtn:hover{background:#6d28d9;transform:scale(1.1);}
+#fileInput{display:none;}
+
+.file-drop-zone{
+  border:2px dashed rgba(0,212,255,0.35);
+  border-radius:12px;
+  padding:22px 16px;
+  margin-top:14px;
+  text-align:center;
+  cursor:pointer;
+  transition:all 0.25s;
+  background:rgba(0,212,255,0.04);
+  position:relative;
+}
+.file-drop-zone:hover,.file-drop-zone.dragover{
+  border-color:#00d4ff;
+  background:rgba(0,212,255,0.09);
+}
+.file-drop-zone .drop-icon{font-size:28px;margin-bottom:6px;}
+.file-drop-zone p{font-size:13px;color:#94a3b8;}
+.file-drop-zone p span{color:#00d4ff;font-weight:600;}
+.file-drop-zone .file-types{font-size:11px;color:#475569;margin-top:5px;}
+
+.file-pill{
+  display:none;
+  align-items:center;
+  gap:10px;
+  background:rgba(124,58,237,0.15);
+  border:1px solid rgba(124,58,237,0.4);
+  border-radius:10px;
+  padding:10px 16px;
+  margin-top:10px;
+  font-size:13px;
+  color:#c4b5fd;
+}
+.file-pill.show{display:flex;}
+.file-pill .pill-name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:left;}
+.file-pill .pill-remove{cursor:pointer;color:#f87171;font-size:16px;font-weight:700;line-height:1;}
+.file-pill .pill-remove:hover{color:#ff4444;}
+
+#imgPreview{
+  display:none;
+  max-width:100%;
+  border-radius:10px;
+  margin-top:10px;
+  border:1px solid rgba(0,212,255,0.3);
+  max-height:220px;
+  object-fit:contain;
+}
+
+.input-tabs{display:flex;gap:8px;margin-bottom:10px;}
+.tab-btn{flex:1;padding:9px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05);color:#94a3b8;margin-top:0;transition:all 0.2s;}
+.tab-btn.active{background:rgba(0,212,255,0.15);border-color:#00d4ff;color:#00d4ff;}
+.tab-btn:hover{transform:none;background:rgba(255,255,255,0.08);}
 
 #micStatus{font-size:12px;color:#00d4ff;margin-top:5px;min-height:18px;}
 
@@ -46,6 +102,43 @@ textarea{width:100%;height:180px;background:#05051a;color:#e2e8f0;border:1px sol
 .confidence-bar{width:100%;height:10px;background:#222;border-radius:10px;margin-top:10px;}
 #confidenceFill{height:100%;width:0%;background:#00d4ff;border-radius:10px;transition:width 0.8s ease;}
 #loading{margin-top:10px;display:none;font-size:14px;color:#aaa;}
+
+.safety-box{
+  margin-top:16px;
+  padding:16px;
+  background:rgba(0,0,0,0.25);
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,0.1);
+  text-align:left;
+  white-space:normal;
+}
+.safety-box .safety-title{
+  font-weight:700;
+  color:#00d4ff;
+  font-size:14px;
+  margin-bottom:10px;
+  display:block;
+}
+.safety-step{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  margin-bottom:8px;
+  font-size:13px;
+  color:#e2e8f0;
+  line-height:1.5;
+}
+.safety-step .s-icon{font-size:15px;min-width:22px;}
+.safety-note{
+  margin-top:12px;
+  padding:10px 14px;
+  border-radius:8px;
+  font-size:13px;
+  font-weight:600;
+  line-height:1.5;
+}
+.safety-note.danger{background:rgba(255,80,80,0.12);border:1px solid rgba(255,80,80,0.35);color:#fca5a5;}
+.safety-note.safe{background:rgba(0,200,140,0.1);border:1px solid rgba(0,200,140,0.3);color:#6ee7b7;}
 
 .tips{margin-top:20px;font-size:13px;color:#aaa;text-align:left;}
 .footer{margin-top:20px;font-size:12px;opacity:0.6;}
@@ -62,6 +155,14 @@ textarea{width:100%;height:180px;background:#05051a;color:#e2e8f0;border:1px sol
 .clear-btn:hover{background:rgba(255,0,0,0.1);}
 .empty-history{color:#475569;font-size:14px;padding:30px 0;}
 
+.source-tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:6px;margin-bottom:6px;font-weight:600;}
+.source-file{background:rgba(124,58,237,0.2);color:#c4b5fd;border:1px solid rgba(124,58,237,0.4);}
+.source-voice{background:rgba(255,59,92,0.15);color:#fca5a5;border:1px solid rgba(255,59,92,0.3);}
+.source-text{background:rgba(0,212,255,0.1);color:#67e8f9;border:1px solid rgba(0,212,255,0.25);}
+.source-image{background:rgba(16,185,129,0.15);color:#6ee7b7;border:1px solid rgba(16,185,129,0.35);}
+
+#ocrStatus{font-size:12px;color:#10b981;margin-top:6px;min-height:18px;}
+
 @media(max-width:600px){.container{width:90%;padding:25px 20px;}.stat-box .stat-num{font-size:18px;}}
 </style>
 </head>
@@ -71,7 +172,7 @@ textarea{width:100%;height:180px;background:#05051a;color:#e2e8f0;border:1px sol
 <div id="homePage" class="center">
   <div class="container">
     <h1>🔍 Fake Job <span>Detector</span></h1>
-    <p class="subtitle">AI-powered protection for women against online employment scams — now with voice input, history tracking & smart analysis.</p>
+    <p class="subtitle">AI-powered protection for women against online employment scams — now with voice input, file upload, image upload, history tracking & smart analysis.</p>
 
     <div class="stats-grid">
       <div class="stat-box"><span class="stat-num">76K+</span><div class="stat-label">Women targeted in 2025</div></div>
@@ -82,6 +183,8 @@ textarea{width:100%;height:180px;background:#05051a;color:#e2e8f0;border:1px sol
     <div class="feature-box"><span class="feature-icon">🤖</span><span>AI scam detection</span></div>
     <div class="feature-box"><span class="feature-icon">⚡</span><span>Instant results</span></div>
     <div class="feature-box"><span class="feature-icon">🎙️</span><span>Voice to text</span><span class="toggle">NEW</span></div>
+    <div class="feature-box"><span class="feature-icon">📁</span><span>File upload (.txt / .pdf / .docx)</span><span class="toggle">NEW</span></div>
+    <div class="feature-box"><span class="feature-icon">🖼️</span><span>Image upload (.jpg / .png / .webp)</span><span class="toggle">NEW</span></div>
     <div class="feature-box"><span class="feature-icon">📋</span><span>Scan history</span><span class="toggle">NEW</span></div>
 
     <button onclick="goToDetector()">Start Analyzing →</button>
@@ -94,22 +197,83 @@ textarea{width:100%;height:180px;background:#05051a;color:#e2e8f0;border:1px sol
 <div id="detectorPage" class="center hidden">
   <div class="container">
     <h1 style="color:#00d4ff;">🔍 Job Detector</h1>
-    <p style="font-size:14px;color:#aaa;margin-bottom:10px;">Paste or speak the job description below</p>
+    <p style="font-size:14px;color:#aaa;margin-bottom:12px;">Paste, speak, or upload a file / image with the job description</p>
 
-    <div class="textarea-wrap">
-      <textarea id="jobText" placeholder="Paste job description or press 🎙️ to speak..."></textarea>
-      <button id="micBtn" onclick="toggleVoice()" title="Voice Input">🎙️</button>
+    <!-- Input mode tabs -->
+    <div class="input-tabs">
+      <button class="tab-btn active" onclick="switchTab('text')" id="tabText">✏️ Type / Paste</button>
+      <button class="tab-btn" onclick="switchTab('voice')" id="tabVoice">🎙️ Voice</button>
+      <button class="tab-btn" onclick="switchTab('file')" id="tabFile">📁 File</button>
+      <button class="tab-btn" onclick="switchTab('image')" id="tabImage">🖼️ Image</button>
+      <button class="tab-btn" onclick="switchTab('camera')" id="tabCamera">📷 Camera</button>
     </div>
-    <p id="micStatus"></p>
+
+    <!-- Text / Voice panel -->
+    <div id="panelTextVoice">
+      <div class="textarea-wrap">
+        <textarea id="jobText" placeholder="Paste job description or press 🎙️ to speak..."></textarea>
+        <button id="micBtn" onclick="toggleVoice()" title="Voice Input">🎙️</button>
+        <button id="filePickBtn" onclick="document.getElementById('fileInput').click()" title="Upload File">📁</button>
+        <input type="file" id="fileInput" accept=".txt,.pdf,.doc,.docx,.jpg,.jpeg,.png,.webp" onchange="handleFileSelect(event)">
+      </div>
+      <p id="micStatus"></p>
+    </div>
+
+    <!-- File upload panel -->
+    <div id="panelFile" class="hidden">
+      <div class="file-drop-zone" id="dropZone"
+        ondragover="onDragOver(event)" ondragleave="onDragLeave(event)" ondrop="onDrop(event)"
+        onclick="document.getElementById('fileInput2').click()">
+        <div class="drop-icon">📂</div>
+        <p>Drag & drop your file here or <span>click to browse</span></p>
+        <p class="file-types">Supported: .txt &nbsp;•&nbsp; .pdf &nbsp;•&nbsp; .doc &nbsp;•&nbsp; .docx</p>
+        <input type="file" id="fileInput2" accept=".txt,.pdf,.doc,.docx" style="display:none" onchange="handleFileSelect(event)">
+      </div>
+    </div>
+
+    <!-- Image upload panel -->
+    <div id="panelImage" class="hidden">
+      <div class="file-drop-zone" id="dropZoneImg"
+        ondragover="onDragOverImg(event)" ondragleave="onDragLeaveImg(event)" ondrop="onDropImg(event)"
+        onclick="document.getElementById('fileInput3').click()">
+        <div class="drop-icon">🖼️</div>
+        <p>Drag & drop an image here or <span>click to browse</span></p>
+        <p class="file-types">Supported: .jpg &nbsp;•&nbsp; .jpeg &nbsp;•&nbsp; .png &nbsp;•&nbsp; .webp</p>
+        <input type="file" id="fileInput3" accept=".jpg,.jpeg,.png,.webp" style="display:none" onchange="handleFileSelect(event)">
+      </div>
+      <p id="ocrStatus"></p>
+    </div>
+
+    <!-- Camera panel -->
+    <div id="panelCamera" class="hidden">
+      <video id="cameraFeed2" autoplay playsinline style="width:100%;border-radius:12px;border:2px solid #00d4ff;background:#000;margin-top:10px;max-height:240px;object-fit:cover;"></video>
+      <canvas id="cameraCanvas" style="display:none;"></canvas>
+      <button onclick="capturePhoto()" style="margin-top:10px;background:linear-gradient(90deg,#00d4ff,#00e1ff);color:#0a0a2e;border:none;padding:14px;border-radius:10px;font-size:16px;font-weight:700;cursor:pointer;width:100%;">📸 Capture Photo</button>
+      <p id="cameraError2" style="color:#ff6b6b;font-size:12px;margin-top:6px;min-height:18px;"></p>
+      <p id="ocrStatus"></p>
+    </div>
+
+    <div class="file-pill" id="filePill">
+      <span id="pillIcon">📄</span>
+      <span class="pill-name" id="pillName"></span>
+      <span class="pill-remove" onclick="removeFile()" title="Remove file">✕</span>
+    </div>
+
+    <!-- Image preview -->
+    <img id="imgPreview" alt="Uploaded job image preview">
 
     <button id="btn" onclick="checkJob()">Check Now ✓</button>
     <p id="loading">⏳ Analyzing...</p>
 
     <div class="result" id="result">
+      <div id="sourceTagWrap"></div>
       <h2 id="resultText"></h2>
       <p id="resultDesc"></p>
       <p id="reasonText"></p>
       <div class="confidence-bar"><div id="confidenceFill"></div></div>
+
+      <!-- Safety note — always shown -->
+      <div id="safetyNote" class="safety-note" style="margin-top:16px;"></div>
     </div>
 
     <div class="tips">
@@ -136,7 +300,21 @@ textarea{width:100%;height:180px;background:#05051a;color:#e2e8f0;border:1px sol
   </div>
 </div>
 
+<!-- pdf.js CDN for PDF reading -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<!-- Tesseract.js CDN for image OCR -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/5.0.4/tesseract.min.js"></script>
 <script>
+if(typeof pdfjsLib !== 'undefined'){
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+}
+
+// ─── STATE ───
+let currentInputSource = 'text';
+let loadedFileText = '';
+let loadedFileName = '';
+let isImageSource = false;
+
 // ─── NAVIGATION ───
 function goToDetector(){
   hideAll();
@@ -156,6 +334,34 @@ function hideAll(){
     document.getElementById(id).classList.add("hidden"));
 }
 
+// ─── INPUT TABS ───
+function switchTab(tab){
+  currentInputSource = tab;
+  ['text','voice','file','image','camera'].forEach(t=>{
+    const el = document.getElementById('tab'+t.charAt(0).toUpperCase()+t.slice(1));
+    if(el) el.classList.remove('active');
+  });
+  document.getElementById('tabText').classList.toggle('active', tab==='text');
+  document.getElementById('tabVoice').classList.toggle('active', tab==='voice');
+  document.getElementById('tabFile').classList.toggle('active', tab==='file');
+  document.getElementById('tabImage').classList.toggle('active', tab==='image');
+  document.getElementById('tabCamera').classList.toggle('active', tab==='camera');
+
+  document.getElementById('panelTextVoice').classList.toggle('hidden', tab==='file'||tab==='image'||tab==='camera');
+  document.getElementById('panelFile').classList.toggle('hidden', tab!=='file');
+  document.getElementById('panelImage').classList.toggle('hidden', tab!=='image');
+  document.getElementById('panelCamera').classList.toggle('hidden', tab!=='camera');
+
+  if(tab==='camera'){ startCameraStream(); } else { stopCameraStream(); }
+
+  if(tab === 'voice' && !isListening){
+    setTimeout(toggleVoice, 300);
+  }
+  if(tab !== 'voice' && isListening){
+    recognition && recognition.stop();
+  }
+}
+
 // ─── VOICE TO TEXT ───
 let recognition = null;
 let isListening = false;
@@ -170,8 +376,10 @@ function toggleVoice(){
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   recognition = new SpeechRecognition();
   recognition.lang = 'en-IN';
-  recognition.continuous = false;
+  recognition.continuous = true;
   recognition.interimResults = true;
+
+  let finalTranscript = '';
 
   recognition.onstart = ()=>{
     isListening = true;
@@ -180,16 +388,20 @@ function toggleVoice(){
     document.getElementById("micStatus").innerText = "🔴 Listening... speak now";
   };
   recognition.onresult = (e)=>{
-    let transcript = "";
-    for(let i=0;i<e.results.length;i++) transcript += e.results[i][0].transcript;
-    document.getElementById("jobText").value = transcript;
+    let interim = '';
+    for(let i = e.resultIndex; i < e.results.length; i++){
+      const t = e.results[i][0].transcript;
+      if(e.results[i].isFinal) finalTranscript += t + ' ';
+      else interim = t;
+    }
+    document.getElementById("jobText").value = finalTranscript + interim;
   };
   recognition.onend = ()=>{
     isListening = false;
     document.getElementById("micBtn").classList.remove("listening");
     document.getElementById("micBtn").innerText = "🎙️";
     document.getElementById("micStatus").innerText = "✅ Voice captured!";
-    setTimeout(()=>document.getElementById("micStatus").innerText="", 2000);
+    setTimeout(()=>document.getElementById("micStatus").innerText="", 2500);
   };
   recognition.onerror = (e)=>{
     isListening = false;
@@ -200,13 +412,217 @@ function toggleVoice(){
   recognition.start();
 }
 
+// ─── FILE HANDLING ───
+function handleFileSelect(event){
+  const file = event.target.files[0];
+  if(!file) return;
+  processFile(file);
+}
+
+function onDragOver(e){
+  e.preventDefault();
+  document.getElementById('dropZone').classList.add('dragover');
+}
+function onDragLeave(e){
+  document.getElementById('dropZone').classList.remove('dragover');
+}
+function onDrop(e){
+  e.preventDefault();
+  document.getElementById('dropZone').classList.remove('dragover');
+  const file = e.dataTransfer.files[0];
+  if(file) processFile(file);
+}
+
+function onDragOverImg(e){
+  e.preventDefault();
+  document.getElementById('dropZoneImg').classList.add('dragover');
+}
+function onDragLeaveImg(e){
+  document.getElementById('dropZoneImg').classList.remove('dragover');
+}
+function onDropImg(e){
+  e.preventDefault();
+  document.getElementById('dropZoneImg').classList.remove('dragover');
+  const file = e.dataTransfer.files[0];
+  if(file) processFile(file);
+}
+
+function processFile(file){
+  const name = file.name;
+  const ext = name.split('.').pop().toLowerCase();
+  loadedFileName = name;
+
+  const allowedDocs = ['txt','pdf','doc','docx'];
+  const allowedImgs = ['jpg','jpeg','png','webp'];
+  const allowed = [...allowedDocs, ...allowedImgs];
+
+  if(!allowed.includes(ext)){
+    alert('❌ Unsupported file type.\nPlease upload .txt, .pdf, .doc, .docx, .jpg, .jpeg, .png, or .webp files.');
+    return;
+  }
+
+  showFilePill(name, allowedImgs.includes(ext) ? '🖼️' : '📄');
+  isImageSource = allowedImgs.includes(ext);
+
+  if(ext === 'txt'){
+    readTxt(file);
+  } else if(ext === 'pdf'){
+    readPdf(file);
+  } else if(ext === 'doc' || ext === 'docx'){
+    readDocx(file);
+  } else if(allowedImgs.includes(ext)){
+    readImage(file);
+  }
+}
+
+function showFilePill(name, icon){
+  document.getElementById('pillName').textContent = name;
+  document.getElementById('pillIcon').textContent = icon || '📄';
+  document.getElementById('filePill').classList.add('show');
+}
+
+function removeFile(){
+  loadedFileText = '';
+  loadedFileName = '';
+  isImageSource = false;
+  document.getElementById('filePill').classList.remove('show');
+  document.getElementById('fileInput').value = '';
+  document.getElementById('fileInput2').value = '';
+  document.getElementById('fileInput3').value = '';
+  document.getElementById('jobText').value = '';
+  document.getElementById('result').style.display = 'none';
+  document.getElementById('imgPreview').style.display = 'none';
+  document.getElementById('imgPreview').src = '';
+  document.getElementById('ocrStatus').innerText = '';
+}
+
+function readTxt(file){
+  const reader = new FileReader();
+  reader.onload = (e)=>{
+    loadedFileText = e.target.result.trim();
+    document.getElementById('jobText').value = loadedFileText;
+    currentInputSource = 'file';
+    switchTab('text');
+    showToast('✅ Text file loaded — '+loadedFileText.length+' characters');
+  };
+  reader.readAsText(file);
+}
+
+async function readPdf(file){
+  try{
+    showToast('⏳ Reading PDF...');
+    const arrayBuffer = await file.arrayBuffer();
+    const pdf = await pdfjsLib.getDocument({data: arrayBuffer}).promise;
+    let fullText = '';
+    for(let i = 1; i <= pdf.numPages; i++){
+      const page = await pdf.getPage(i);
+      const content = await page.getTextContent();
+      const pageText = content.items.map(item => item.str).join(' ');
+      fullText += pageText + '\n';
+    }
+    loadedFileText = fullText.trim();
+    document.getElementById('jobText').value = loadedFileText;
+    currentInputSource = 'file';
+    switchTab('text');
+    showToast('✅ PDF loaded — '+pdf.numPages+' page(s), '+loadedFileText.length+' characters');
+  } catch(err){
+    alert('❌ Could not read PDF. Make sure it is a text-based PDF (not a scanned image).\n\nError: '+err.message);
+  }
+}
+
+async function readDocx(file){
+  showToast('⏳ Reading Word document...');
+  if(typeof mammoth === 'undefined'){
+    await loadScript('https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js');
+  }
+  try{
+    const arrayBuffer = await file.arrayBuffer();
+    const result = await mammoth.extractRawText({arrayBuffer: arrayBuffer});
+    loadedFileText = result.value.trim();
+    document.getElementById('jobText').value = loadedFileText;
+    currentInputSource = 'file';
+    switchTab('text');
+    showToast('✅ Word document loaded — '+loadedFileText.length+' characters');
+  } catch(err){
+    alert('❌ Could not read Word document.\n\nError: '+err.message);
+  }
+}
+
+function readImage(file){
+  const reader = new FileReader();
+  reader.onload = async (e)=>{
+    const preview = document.getElementById('imgPreview');
+    preview.src = e.target.result;
+    preview.style.display = 'block';
+    currentInputSource = 'image';
+    switchTab('text');
+
+    const ocrStatus = document.getElementById('ocrStatus');
+    ocrStatus.innerText = '🔍 Extracting text from image (OCR)...';
+    showToast('⏳ Running OCR on image...');
+
+    try{
+      const result = await Tesseract.recognize(e.target.result, 'eng', {
+        logger: m => {
+          if(m.status === 'recognizing text'){
+            ocrStatus.innerText = '🔍 OCR progress: ' + Math.round(m.progress * 100) + '%';
+          }
+        }
+      });
+      const extracted = result.data.text.trim();
+      if(extracted.length > 20){
+        loadedFileText = extracted;
+        document.getElementById('jobText').value = extracted;
+        ocrStatus.innerText = '✅ Text extracted from image — ' + extracted.length + ' characters';
+        showToast('✅ OCR complete! Text extracted from image.');
+      } else {
+        loadedFileText = '[Image: ' + file.name + '] — Could not extract enough text via OCR. Please type the job description manually.';
+        document.getElementById('jobText').value = '';
+        ocrStatus.innerText = '⚠️ Low text detected. Please type the job description manually.';
+        showToast('⚠️ OCR found little text — try a clearer image or type manually.');
+      }
+    } catch(err){
+      loadedFileText = '';
+      ocrStatus.innerText = '❌ OCR failed: ' + err.message;
+      showToast('❌ OCR error. Please type the job description manually.');
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+function loadScript(src){
+  return new Promise((resolve, reject)=>{
+    const s = document.createElement('script');
+    s.src = src;
+    s.onload = resolve;
+    s.onerror = reject;
+    document.head.appendChild(s);
+  });
+}
+
+// ─── TOAST ───
+function showToast(msg){
+  let toast = document.getElementById('toast');
+  if(!toast){
+    toast = document.createElement('div');
+    toast.id = 'toast';
+    toast.style.cssText = `position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1e293b;border:1px solid rgba(0,212,255,0.3);border-radius:10px;padding:10px 20px;font-size:13px;color:#e2e8f0;z-index:9999;box-shadow:0 4px 20px rgba(0,0,0,0.5);transition:opacity 0.3s;`;
+    document.body.appendChild(toast);
+  }
+  toast.textContent = msg;
+  toast.style.opacity = '1';
+  clearTimeout(toast._timer);
+  toast._timer = setTimeout(()=>{ toast.style.opacity='0'; }, 2800);
+}
+
 // ─── SCAN HISTORY ───
-function saveToHistory(text, result, confidence){
+function saveToHistory(text, result, confidence, source){
   const history = JSON.parse(localStorage.getItem("jobHistory") || "[]");
   history.unshift({
     text: text.substring(0,100),
     result: result,
     confidence: confidence,
+    source: source || 'text',
     date: new Date().toLocaleString('en-IN')
   });
   if(history.length > 20) history.pop();
@@ -220,12 +636,14 @@ function loadHistory(){
     list.innerHTML = '<p class="empty-history">📭 No scans yet. Start checking jobs!</p>';
     return;
   }
+  const sourceIcon = {file:'📁', voice:'🎙️', text:'✏️', image:'🖼️'};
   list.innerHTML = history.map(item=>`
     <div class="history-item">
       <div class="h-top">
         <span class="h-badge ${item.result==='FAKE'?'badge-fake':'badge-real'}">
           ${item.result==='FAKE'?'⚠️ FAKE':'✅ REAL'}
         </span>
+        <span style="font-size:11px;color:#7c3aed;">${sourceIcon[item.source]||'✏️'} ${item.source||'text'}</span>
         <span class="h-date">${item.date}</span>
       </div>
       <div class="h-text">${item.text}...</div>
@@ -243,19 +661,32 @@ function clearHistory(){
 
 // ─── CHECK JOB ───
 async function checkJob(){
-  const text = document.getElementById('jobText').value;
+  let text = '';
+  if(loadedFileText && loadedFileText.trim().length > 0){
+    text = loadedFileText;
+  } else {
+    text = document.getElementById('jobText').value;
+  }
+
   const btn = document.getElementById('btn');
 
-  if(text.trim()===""){alert("Please enter text!");return;}
-  if(text.length<100){alert("⚠️ Please enter complete job description!\nExample: Company name, role, salary, requirements, contact details etc!");return;}
-  if(/^[a-zA-Z]{1,10}$/.test(text.trim())){alert("Please enter meaningful job description!");return;}
+  if(text.trim()===""){
+    alert("Please enter or upload a job description!");
+    return;
+  }
+  if(text.length < 100){
+    alert("⚠️ Please enter a complete job description!\nExample: Company name, role, salary, requirements, contact details etc!");
+    return;
+  }
+  if(/^[a-zA-Z]{1,10}$/.test(text.trim())){
+    alert("Please enter meaningful job description!");
+    return;
+  }
 
-  // ✅ Job keywords validation
   const jobKeywords = ["job","work","salary","hire","apply","position",
-  "vacancy","company","office","remote","experience","skills",
-  "requirements","contact","interview","fresher","recruiter",
-  "joining","profile","opening","qualification","post"];
-
+    "vacancy","company","office","remote","experience","skills",
+    "requirements","contact","interview","fresher","recruiter",
+    "joining","profile","opening","qualification","post"];
   const hasJobWord = jobKeywords.some(word=>text.toLowerCase().includes(word));
   if(!hasJobWord){
     alert("⚠️ Please enter a proper job description!\n\nExample: 'We are hiring freshers for data entry job...'");
@@ -271,7 +702,7 @@ async function checkJob(){
     const response = await fetch("https://fake-job-backend-x5fs.onrender.com/predict",{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({text:text})
+      body:JSON.stringify({text: text})
     });
     const data = await response.json();
 
@@ -279,14 +710,28 @@ async function checkJob(){
     result.style.display='block';
     let reason="";
 
+    // Determine source
+    const src = isImageSource ? 'image' : (loadedFileText ? 'file' : (currentInputSource==='voice' ? 'voice' : 'text'));
+    const srcLabels = {file:'📁 File Upload', voice:'🎙️ Voice Input', text:'✏️ Text Input', image:'🖼️ Image Upload'};
+    const srcClasses = {file:'source-file', voice:'source-voice', text:'source-text', image:'source-image'};
+    document.getElementById('sourceTagWrap').innerHTML =
+      `<span class="source-tag ${srcClasses[src]}">${srcLabels[src]}</span>`;
+
     if(data.result==='FAKE'){
       result.className='result fake';
       document.getElementById('resultText').innerText='⚠️ FAKE JOB DETECTED!';
-      if(text.toLowerCase().includes("pay")||text.toLowerCase().includes("fee")) reason+="⚠️ Asking money is a scam sign\n";
-      if(text.toLowerCase().includes("whatsapp")||text.toLowerCase().includes("telegram")) reason+="⚠️ Unofficial communication used\n";
-      if(text.toLowerCase().includes("urgent")) reason+="⚠️ Creates pressure to apply quickly\n";
-      if(reason==="") reason="⚠️ Suspicious job patterns detected";
-    }else{
+      if(text.toLowerCase().includes("pay")||text.toLowerCase().includes("fee"))
+        reason+="⚠️ Asking money is a scam sign\n";
+      if(text.toLowerCase().includes("whatsapp")||text.toLowerCase().includes("telegram"))
+        reason+="⚠️ Unofficial communication used\n";
+      if(text.toLowerCase().includes("urgent"))
+        reason+="⚠️ Creates pressure to apply quickly\n";
+      if(text.toLowerCase().includes("guaranteed")||text.toLowerCase().includes("earn daily"))
+        reason+="⚠️ Unrealistic income promise detected\n";
+      if(text.toLowerCase().includes("no experience")||text.toLowerCase().includes("anyone can"))
+        reason+="⚠️ No-skill-required claim is suspicious\n";
+      if(reason==="") reason="⚠️ Suspicious job patterns detected by AI model";
+    } else {
       result.className='result real';
       document.getElementById('resultText').innerText='✅ REAL JOB!';
       reason="✅ This job looks safe";
@@ -296,16 +741,95 @@ async function checkJob(){
     document.getElementById('reasonText').innerText=reason;
     document.getElementById("confidenceFill").style.width=data.confidence+"%";
 
-    // ✅ Auto save to history
-    saveToHistory(text, data.result, data.confidence);
+    // ─── SAFETY NOTE (only for REAL) ───
+    const safetyNote = document.getElementById('safetyNote');
+    if(data.result === 'FAKE'){
+      safetyNote.className = '';
+      safetyNote.innerHTML = '';
+    } else {
+      safetyNote.className = 'safety-note safe';
+      safetyNote.innerHTML = '✅ Even though this looks safe, always verify the company yourself before sharing personal details, signing anything, or attending an interview. No tool is 100% accurate — your safety comes first.';
+    }
 
-  }catch(e){
+    saveToHistory(text, data.result, data.confidence, src);
+
+  } catch(e){
     alert("Server error! Please try again.");
   }
 
   document.getElementById("loading").style.display="none";
   btn.innerText="Check Now ✓";
   btn.disabled=false;
+}
+
+// ─── CAMERA ───
+let cameraStream = null;
+
+async function startCameraStream(){
+  const errEl = document.getElementById('cameraError2');
+  errEl.innerText = '';
+  try{
+    cameraStream = await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'}},audio:false});
+    document.getElementById('cameraFeed2').srcObject = cameraStream;
+  } catch(err){
+    errEl.innerText = '❌ Camera access denied. Please allow camera permission.';
+  }
+}
+
+function stopCameraStream(){
+  if(cameraStream){ cameraStream.getTracks().forEach(t=>t.stop()); cameraStream=null; }
+  const feed = document.getElementById('cameraFeed2');
+  if(feed) feed.srcObject = null;
+}
+
+function capturePhoto(){
+  const video = document.getElementById('cameraFeed2');
+  const canvas = document.getElementById('cameraCanvas');
+  if(!video.srcObject){ alert('❌ Camera not started. Please allow camera access.'); return; }
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
+  canvas.getContext('2d').drawImage(video, 0, 0);
+  const dataUrl = canvas.toDataURL('image/jpeg', 0.92);
+
+  stopCameraStream();
+
+  const preview = document.getElementById('imgPreview');
+  preview.src = dataUrl;
+  preview.style.display = 'block';
+  isImageSource = true;
+  currentInputSource = 'image';
+  loadedFileName = 'camera_photo.jpg';
+  showFilePill('camera_photo.jpg (Camera)', '📷');
+  switchTab('text');
+
+  const ocrStatus = document.getElementById('ocrStatus');
+  ocrStatus.innerText = '🔍 Extracting text from photo (OCR)...';
+  showToast('⏳ Running OCR on captured photo...');
+
+  Tesseract.recognize(dataUrl, 'eng', {
+    logger: m => {
+      if(m.status === 'recognizing text'){
+        ocrStatus.innerText = '🔍 OCR progress: ' + Math.round(m.progress * 100) + '%';
+      }
+    }
+  }).then(result => {
+    const extracted = result.data.text.trim();
+    if(extracted.length > 20){
+      loadedFileText = extracted;
+      document.getElementById('jobText').value = extracted;
+      ocrStatus.innerText = '✅ Text extracted — ' + extracted.length + ' characters';
+      showToast('✅ OCR complete! Text extracted from photo.');
+    } else {
+      loadedFileText = '';
+      document.getElementById('jobText').value = '';
+      ocrStatus.innerText = '⚠️ Low text detected. Try a clearer photo or type manually.';
+      showToast('⚠️ OCR found little text — try a clearer photo.');
+    }
+  }).catch(err => {
+    loadedFileText = '';
+    ocrStatus.innerText = '❌ OCR failed: ' + err.message;
+    showToast('❌ OCR error. Please type manually.');
+  });
 }
 </script>
 </body>
